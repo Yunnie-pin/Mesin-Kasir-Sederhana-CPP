@@ -15,6 +15,7 @@ void konfirmasiPembayaran();
 void footer();
 void tambahDB();
 void footerMain();
+int rumusRekursif(int *a,int *b, int i);
 string username = "admin";
 string password = "admin";
 string inputUsername,inputPassword,strukBarang[] = {" "," "," "," "," "," "," "," "};
@@ -119,29 +120,36 @@ void pembelian(){
 	} while (kodeBarang==0);
 													//memasukkan nilai int ke variabel kodeBarang
 	if (kodeBarang <= jumlahBarang){				//  Penggunaan IF untk melanjutkan jika kondisi kodeBarang <= (kurang dari samadengan) jumlahBarang
-
 			do{
 			cout << "Masukkan jumlah barang '"<<namaBarang[kodeBarang]<< "' = ";	//Output namaBarang yang akan dibeli menggunakan logika database array
 			cin >> jumlahBeli;												// memasukkan nilai int pada variabel jumlahBeli (Jumlah Barang yang dibeli)
 			} while (jumlahBeli==0);
 
-			arrayJumlahBeli[nomorStruk+1] = jumlahBeli;
-			strukBarang[nomorStruk+1] = namaBarang[kodeBarang];				// memasukkan nilai string dari variabel namaBarang ke namaBarang
-			hargaStruk[nomorStruk+1] = hargaBarang[kodeBarang];
 			nomorStruk = nomorStruk + 1;									// menambah nilai +1 pada variabel nomorStruk setiap pemanggilan fungsi Pembelian 
+			arrayJumlahBeli[nomorStruk] = jumlahBeli;						//untuk menampilkan jumlah barang yang dibeli pada struk
+			strukBarang[nomorStruk] = namaBarang[kodeBarang];				// memasukkan nilai string dari variabel namaBarang ke namaBarang
+			hargaStruk[nomorStruk] = hargaBarang[kodeBarang];
 
-			perkalianBarang = jumlahBeli*hargaBarang[kodeBarang];			 // rumus jumlah barang x harga barang
-			totalBelanjaan = totalBelanjaan + perkalianBarang;				// rumus Total Penjumlahan harga barang
+			totalBelanjaan = rumusRekursif(hargaStruk,arrayJumlahBeli,nomorStruk);
+		
 			cout << "Harga Total = Rp. "<< totalBelanjaan << endl <<endl;	// menampilkan output Total Belanjaan
 		}
-
 	else{								// penggunaan else jika kondisi kodeBarang <= (kurang dari samadengan) jumlahBarang
 			cout << " Tolong masukkan Kode barang yang tertera"<<endl;		//output teks
 			pembelian();				//memanggil pungsi pembelian() kembali
-
 	}
 	footer();
+}
+
+int rumusRekursif(int *a,int *b, int i){
+	if(i > 0 ){
+		return (a[i]*b[i]) + rumusRekursif(a,b,i-1);
+	}
+	else{
+		return 0;
+	}
 	
+
 }
 
 void konfirmasiPembayaran(){
@@ -162,7 +170,6 @@ void konfirmasiPembayaran(){
 		cin >> confirm;
 		} while (confirm != true);
 	struk();
-
 }
 
 void struk(){
