@@ -13,10 +13,12 @@ void konfirmasiPembayaran();
 void footer();
 void tambahDB();
 void footerMain();
-void gantiEmPass();
+void verifikasiUser();
+void gantiUserPass();
 int rumusRekursif(int *a,int *b, int i);	//memanggil fungsi rekursif
 string username = "admin";					
 string password = "admin";
+string reUser,rePass,verifikasi;
 string inputUsername,inputPassword,strukBarang[] = {" "," "," "," "," "," "," "," "," "," "};
 int inputMenu,kodeBarang,jumlahBeli,inputFooter,nomorStruk,i;
 long perkalianBarang,totalBelanjaan,uangPengunjung,uangKembalian;
@@ -26,6 +28,7 @@ int hargaBarang[] = {0, 5000, 2000, 1000,1000,0,0,0,0,0};
 int nomorBarang[] = {0,0,0,0,0,0,0,0,0,0};
 int hargaStruk[] = {0,0,0,0,0,0,0,0,0,0};
 int arrayJumlahBeli[] = {0,0,0,0,0,0,0,0,0,0};
+
 bool confirm;
 
 int main(){
@@ -85,7 +88,7 @@ void menu(){
 	case 3:
 		system("clear");
 		cout << "3. Ganti Username/Password" <<endl;
-		gantiEmPass();
+		verifikasiUser();
 		break;
 	case 4:
 		system("clear");
@@ -94,6 +97,7 @@ void menu(){
 	
 	default:
 		system("clear");
+		cout << "Selamat Tinggal" << username;
 		menu();
 		break;
 	}
@@ -243,3 +247,50 @@ void tambahDB(){
 	footerMain ();
 }
 
+void verifikasiUser(){
+	cout << "===========Verifikasi============"<<endl;
+	cout << "Hai "<< username << "!"<<endl;
+	cout << "Masukkan Password untuk verifikasi"<<endl;
+	cout << "Password = ";
+	cin >> inputPassword;
+	if (inputPassword == password){
+		gantiUserPass();
+	}
+	else{
+		cout << "Password Salah! harap ulangi"<<endl;
+		verifikasiUser();
+	}
+	
+}
+
+void gantiUserPass(){
+	system("clear");
+	cout << "======Mengganti Username/Password======"<<endl;
+	do{
+		cout << "Masukkan Username Baru = ";
+		cin >> reUser;
+		cout << "Masukkan ulang username baru = ";
+		cin >> verifikasi;
+	} while (reUser != verifikasi);
+
+	username = reUser;
+
+	do{
+		cout << "Masukkan Password Baru = ";
+		cin >> rePass;
+		cout << "Masukkan ulang password baru = ";
+		cin >> verifikasi;
+	} while (rePass != verifikasi);
+
+	password = rePass;
+	cout << "Selamat! " << username << ", Username/Password telah berhasil dirubah"<<endl;
+
+	cout << "Ketik 1 / true untuk selesai"<<endl;
+	cout << "Ketik 0 / false untuk memasukkan kembali"<<endl;
+	cin >> confirm;
+	if (confirm = true){
+		main();
+	}else{
+		gantiUserPass();
+	}
+}
