@@ -1,13 +1,11 @@
-#include <iostream>
-#include <stdlib.h>
-#include <string>
+#include <iostream>					//memanggil library
 
-using namespace std;
+using namespace std;				// untuk mempersingkat pengkodingan
 
-void login();
-void menu();
-void programKasir();
-void listData();
+void login();						//memanggil fungsi
+void menu();						
+void programKasir();				
+void listData();					
 void pembelian();
 void footer();
 void struk();
@@ -15,24 +13,26 @@ void konfirmasiPembayaran();
 void footer();
 void tambahDB();
 void footerMain();
-int rumusRekursif(int *a,int *b, int i);
-string username = "admin";
+void gantiEmPass();
+int rumusRekursif(int *a,int *b, int i);	//memanggil fungsi rekursif
+string username = "admin";					
 string password = "admin";
-string inputUsername,inputPassword,strukBarang[] = {" "," "," "," "," "," "," "," "};
+string inputUsername,inputPassword,strukBarang[] = {" "," "," "," "," "," "," "," "," "," "};
 int inputMenu,kodeBarang,jumlahBeli,inputFooter,nomorStruk,i;
 long perkalianBarang,totalBelanjaan,uangPengunjung,uangKembalian;
-int jumlahBarang = 3;
-string namaBarang[] = {"kosong", "aqua", "botol", "curut"," "," "," "," "};
-int hargaBarang[] = {0, 2000, 3000, 4000};
-int nomorBarang[] = {0,0,0,0,0,0,0,0,0};
-int hargaStruk[] = {0,0,0,0,0,0,0,0,0};
-int arrayJumlahBeli[] = {0,0,0,0,0,0,0,0,0};
+int jumlahBarang = 4;
+string namaBarang[] = {"kosong", "Buku", "Bolpoin", "Tipe-X","Pensil"," "," "," "," "," "};
+int hargaBarang[] = {0, 5000, 2000, 1000,1000,0,0,0,0,0};
+int nomorBarang[] = {0,0,0,0,0,0,0,0,0,0};
+int hargaStruk[] = {0,0,0,0,0,0,0,0,0,0};
+int arrayJumlahBeli[] = {0,0,0,0,0,0,0,0,0,0};
 bool confirm;
 
 int main(){
 	system("clear");
+	cout << "==================="<<endl;
     cout << "PROGRAM MESIN KASIR"<<endl;
-    cout << "Kelompok 10" <<endl;
+	cout << "==================="<<endl;
 	login();
 	cin.get();
 	return 0;
@@ -78,13 +78,14 @@ void menu(){
 
 		break;
 	case 2:
-		system("clear");
+		system("clear");	
 		cout << "2. Tambahkan Database Barang" <<endl;
 		tambahDB();
 		break;
 	case 3:
 		system("clear");
 		cout << "3. Ganti Username/Password" <<endl;
+		gantiEmPass();
 		break;
 	case 4:
 		system("clear");
@@ -189,46 +190,56 @@ void struk(){
 }
 
 void footer(){
-	cout << "Masukkan 0 untuk menambah barang"<<endl;
-	cout << "Masukkan 1 untuk konfirmasi pembayaran"<<endl;
-	cout << "Masukkan 99 untuk kembali ke menu utama"<<endl;
-	cout << "Masukkan 98 untuk keluar dari program"<<endl;
-	cout << "Masukkan nomor = " ;
-	cin >> inputFooter;
-	if (inputFooter == 0){
-		programKasir();
-	}else if (inputFooter == 99){
-		menu();
-	}else if(inputFooter == 98){
-		menu();
-	}else if(inputFooter == 1){
-		konfirmasiPembayaran();
-	}
+	do{
+		cout << "Masukkan 0 untuk menambah barang"<<endl;
+		cout << "Masukkan 1 untuk konfirmasi pembayaran"<<endl;
+		cout << "Masukkan 99 untuk kembali ke menu utama"<<endl;
+		cout << "Masukkan 98 untuk keluar dari program"<<endl;
+		cout << "Masukkan nomor = " ;
+		cin >> inputFooter;
+		if (inputFooter == 0){
+			programKasir();
+		}else if (inputFooter == 99){
+			menu();
+		}else if(inputFooter == 98){
+			menu();
+		}else if(inputFooter == 1){
+			konfirmasiPembayaran();
+		}
+	} while (inputFooter<0,inputFooter>99,inputFooter<98,inputFooter>1);
 
 }
 
 void footerMain(){
-	cout << "Masukkan 99 untuk kembali ke menu utama"<<endl;
-	cout << "Masukkan 98 untuk keluar dari program"<<endl;
-	cout << "Masukkan nomor = " ;
-	cin >> inputFooter;
-	if (inputFooter == 99){
-		menu();
-	}else if (inputFooter == 98){
-		menu();
-	}
+	do{
+		cout << "Masukkan 99 untuk kembali ke menu utama"<<endl;
+		cout << "Masukkan 98 untuk keluar dari program"<<endl;
+		cout << "Masukkan nomor = " ;
+		cin >> inputFooter;
+		if (inputFooter == 99){
+			menu();
+		}else if (inputFooter == 98){
+			menu();
+		}
+	} while (inputFooter>99,inputFooter<98);
 }
 
 void tambahDB(){
+	do{
 	listData();
-	jumlahBarang = jumlahBarang + 1;
-	cout << "=== Menambah Database ===" << endl;
-	cout << "Menambah Kode Barang ke " << jumlahBarang <<endl;
-	cout << "Masukkan Nama Barang = ";
-	cin >> namaBarang[jumlahBarang];
-	cout << " Masukkan Harga Barang " << namaBarang[jumlahBarang] << " = ";
-	cin >> hargaBarang[jumlahBarang];
-	cout << "Selamat! "<< namaBarang[jumlahBarang] << " Telah terdaftar di Database!"<<endl;
+		jumlahBarang = jumlahBarang + 1;
+		cout << "=== Menambah Database ===" << endl;
+		cout << "Menambah Kode Barang ke " << jumlahBarang <<endl;
+		cout << "Masukkan Nama Barang(Tanpa Spasi) = ";
+		cin >> namaBarang[jumlahBarang];
+		cout << " Masukkan Harga Barang " << namaBarang[jumlahBarang] << " = ";
+		cin >> hargaBarang[jumlahBarang];
+		cout << "Selamat! "<< namaBarang[jumlahBarang] << " Telah terdaftar di Database!"<<endl;
+		cout << "Ketik 1 / true untuk menambah lagi"<<endl;
+		cout << "Ketik 0 / false untuk selesai"<<endl;
+		cin >> confirm;
+	} while (confirm==1);
+	
 	footerMain ();
 }
 
