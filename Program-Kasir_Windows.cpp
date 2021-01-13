@@ -168,7 +168,7 @@ void konfirmasiPembayaran(){					//memberikan logic pada fungsi konfirmasiPembay
 		do{														// menggunakan looping do while
 			cout << "Masukkan uang = Rp. ";						// membuat form uang pengunjung
 			cin >> uangPengunjung;
-		} while (totalBelanjaan >= uangPengunjung);				// jika input sesuai dengan kondisi maka akan kembali memanggil fungsi do while
+		} while (totalBelanjaan+1 >= uangPengunjung);				// jika input sesuai dengan kondisi maka akan kembali memanggil fungsi do while
 
 		uangKembalian = uangPengunjung - totalBelanjaan; 		//rumus uang kembalian
 
