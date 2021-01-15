@@ -1,0 +1,23 @@
+# Hasil kompilasi
+build/
+out/
+kasir
+kasir.exe
+uji_kasir
+uji_kasir.exe
+*.o
+*.obj
+*.exe
+*.ilk
+*.pdb
+
+# Berkas data yang dibuat program saat dijalankan (isi tiap mesin berbeda)
+barang.csv
+akun.csv
+transaksi.csv
+uji_*.csv
+
+# Berkas editor / IDE
+.vs/
+.vscode/
+*.user
